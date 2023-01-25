@@ -28,7 +28,7 @@ function ChartTabCard() {
   };
 
   return (
-    <Card className="card">
+    <Card className="card card__chart">
       <Menu
         onClick={onClick}
         selectedKeys={[current]}

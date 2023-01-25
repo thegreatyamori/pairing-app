@@ -8,18 +8,20 @@ import RotationCard from '../components/rotation-card';
 function MainPage() {
     return (
         <>
-            <h1>Supply Chain Portal (SCP)</h1>
+            <h1 className='title'>Supply Chain Portal (SCP)</h1>
             <Row>
                 <Col span={24}>
                     <ChartTabCard />
                 </Col>
             </Row>
             <Row>
-                <Col span={12}>
-                    <MembersCard />
-                </Col>
-                <Col span={12}>
+                <Col span={24}>
                     <RotationCard />
+                </Col>
+            </Row>
+            <Row>
+                <Col span={24}>
+                    <MembersCard />
                 </Col>
             </Row>
             <Button className='button__rotation' type="primary" shape="circle" icon={<SyncOutlined />} onClick={() => alert("hola")} />

@@ -1,14 +1,24 @@
 .app {
   margin: 12px;
-  /* text-align: center; */
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5em;
 }
 
 .card {
   margin-bottom: 12px;
 }
 
-.card > .ant-card-body {
+.card__chart > .ant-card-body {
   padding: 5px;
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card__left {
@@ -25,4 +35,14 @@
   right: 10px;
   width: 50px!important;
   height: 50px;
+}
+
+.members__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.member__item {
+  display: flex;
+  justify-content: space-between;
 }
