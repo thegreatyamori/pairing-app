@@ -29,20 +29,29 @@
   margin-right: 6px;
 }
 
+.card__container {
+  display: flex;
+  flex-direction: column;
+}
+
 .button__rotation {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  width: 50px!important;
+  width: 50px !important;
   height: 50px;
 }
 
-.members__container {
+.members__input {
   display: flex;
-  flex-direction: column;
 }
 
 .member__item {
   display: flex;
   justify-content: space-between;
+}
+
+.rotation__input {
+  display: flex;
+  flex-flow: column;
 }
