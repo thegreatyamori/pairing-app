@@ -4,33 +4,41 @@ import { SyncOutlined } from "@ant-design/icons";
 import { Button, Card, DatePicker } from "antd";
 import { transformDate, transformDateTitle } from "../helpers/date";
 import { addRotation, getAllRotations } from "../services/rotation.service";
+import PairingModal from "./pairing-modal";
+
 
 function RotationCard({ getCurrent }) {
   const dateFormat = "YYYY/MM/DD";
-  const [currentDate, setCurrentDate] = useState();
-  const [rotationDays, setRotationDays] = useState(1);
   const [rotations, setRotations] = useState([]);
+  const [currentDate, setCurrentDate] = useState();
   const [toggleInput, setToggleInput] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const disabledDate = (current) => current && current < dayjs().endOf("day");
-  const truncateRotations = (items) => items.slice(-4);
+  const last4Rotations = (items) => items.slice(-4);
   const toggleRotationButton = () => setToggleInput(!toggleInput);
+  const onOpenModal = (evt) => setToggleModal(evt);
+  const onPair = (evt) => {
+    const result = addRotation(currentDate, evt);
+    const _rotations = getAllRotations();
+
+    setRotations(last4Rotations(_rotations));
+    setToggleInput(false);
+    setToggleModal(false);
+    getCurrent(result);
+  };
   const onKeyDown = (evt) => {
-    if (evt.keyCode === 13) {
-      console.log("Evt fired: onKeyDown");
+    if (evt.keyCode !== 13) return;
 
-      const result = addRotation(evt.target.value);
-      const _rotations = getAllRotations();
+    console.log("Evt fired: onKeyDown");
 
-      setRotations(truncateRotations(_rotations));
-      setToggleInput(false);
-      getCurrent(result);
-    }
+    setToggleModal(true);
+    setCurrentDate(evt.target.value);
   };
 
   useEffect(() => {
     setCurrentDate(Date.now());
-    setRotations(truncateRotations(getAllRotations()));
+    setRotations(last4Rotations(getAllRotations()));
   }, []);
 
   return (
@@ -44,7 +52,7 @@ function RotationCard({ getCurrent }) {
           onClick={toggleRotationButton}
         />
       </div>
-      {toggleInput ? (
+      {toggleInput && (
         <div className="rotation__input">
           <DatePicker
             onKeyDown={onKeyDown}
@@ -53,8 +61,6 @@ function RotationCard({ getCurrent }) {
             disabledDate={disabledDate}
           />
         </div>
-      ) : (
-        ""
       )}
       <div className="card__container">
         {rotations.map((item, index) => (
@@ -65,7 +71,13 @@ function RotationCard({ getCurrent }) {
           </span>
         ))}
       </div>
-      <span>Rotation period: {rotationDays} days</span>
+      {toggleModal && (
+        <PairingModal
+          open={toggleModal}
+          toggleOpen={onOpenModal}
+          onPair={onPair}
+        />
+      )}
     </Card>
   );
 }

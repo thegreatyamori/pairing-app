@@ -3,10 +3,10 @@ import StorageService from "./storage.service";
 
 const storageService = new StorageService("rotations");
 
-function addRotation(date) {
+function addRotation(date, matrix) {
     const nextId = crypto.randomUUID();
     const _date = new Date(date);
-    const rotation = new Rotation(nextId, _date);
+    const rotation = new Rotation(nextId, _date, matrix);
     const result = storageService.store(rotation);
 
     return { ...rotation, status: result };
@@ -17,7 +17,7 @@ function getAllRotations() {
 }
 
 function getCurrentRotation() {
-    return storageService.getLast();
+    return storageService.getLast() || { matrix: [] };
 }
 
 function generateRotations(currentDate, rotationDays) {

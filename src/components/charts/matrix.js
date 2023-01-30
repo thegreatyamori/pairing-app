@@ -7,7 +7,8 @@ function MatrixChart(props) {
     height: 600,
     width: 600,
   };
-  const renderPairingMatrix = () => {
+
+  useEffect(() => {
     const { authors, matrix } = props;
     tabularChart.createChart(
       "#tabular-pairing-chart",
@@ -16,10 +17,7 @@ function MatrixChart(props) {
       defaultOptions.width,
       defaultOptions.height
     );
-  };
-
-  useEffect(() => renderPairingMatrix(), []);
-  useEffect(() => renderPairingMatrix(), [props]);
+  }, [props]);
 
   return <div id="tabular-pairing-chart" />;
 }

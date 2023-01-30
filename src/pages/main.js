@@ -13,13 +13,17 @@ function MainPage() {
 
   const fireMembers = (evt) => setMembers(evt);
   const fireCurrent = (evt) => setRotation(evt);
+  const getRotation = () => {
+    const matrix = rotation.matrix.map((item) => ({ ...item, times: 1 }));
+    return { ...rotation, matrix };
+  };
 
   return (
     <>
       <h1 className="title">Supply Chain Portal (SCP)</h1>
       <Row>
         <Col span={24}>
-          <ChartTabCard authors={members} rotation={rotation} />
+          <ChartTabCard authors={members} rotation={getRotation()} />
         </Col>
       </Row>
       <Row>

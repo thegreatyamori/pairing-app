@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@codehardt/leader-line": "^1.0.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -53,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "serve": "^14.2.0"
   }
 }

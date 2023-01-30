@@ -7,8 +7,8 @@ export default class StorageService {
 
     getLast() {
         const items = this.getAll();
-        const lastItem = items[items.length - 1];
-        return lastItem;
+        const lastItem = items.slice(-1);
+        return lastItem[0];
     }
 
     getAll() {
